@@ -18,7 +18,7 @@ start(_StartType, _StartArgs) ->
     Ws = {"/websocket", hotdo_ws, []},
 
     Dispatch = cowboy_router:compile([
-				      {'_', [Ws, Static]}
+			   {'_', [Ws, Static]}
 				     ]),
 
     {ok, _} = cowboy:start_http(http, 100, 

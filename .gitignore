@@ -9,3 +9,4 @@ ebin
 logs
 test/*.beam
 *.beam
+erl_crash*

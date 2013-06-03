@@ -13,7 +13,8 @@ init(_, _, _) ->
 
 update_counter(Op) ->
     folsom_metrics:notify({hotdo_users, {Op, 1}}),
-    gproc:send({p, l, hotdo}, {count, folsom_metrics:get_metric_value(hotdo_users)}).    
+    gproc:send({p, l, hotdo}, 
+	       {count, folsom_metrics:get_metric_value(hotdo_users)}).    
 
 websocket_init(_Transport, Req, _Opt) ->
     gproc:reg({p, l, hotdo}),
@@ -22,7 +23,7 @@ websocket_init(_Transport, Req, _Opt) ->
 
 websocket_handle({text, Msg}, Req, State) ->
     gproc:send({p, l, hotdo}, {text, Msg}),
-    {ok, Req, State}.
+    {ok, Req, State}.				
 
 websocket_info({count, Num}, Req, State) ->
     {reply, {text, jiffy:encode([<<"count">>, [Num]])}, Req, State};

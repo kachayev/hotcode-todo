@@ -6,4 +6,6 @@ start() ->
     lists:foreach(fun(App) ->
 			  ok = application:start(App) 
 		  end,
-		  [crypto, ranch, cowboy, folsom, gproc, hotdo]).
+		  [crypto, 
+		   ranch, 
+		   cowboy, folsom, gproc, hotdo]).
